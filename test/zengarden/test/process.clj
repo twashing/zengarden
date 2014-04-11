@@ -52,4 +52,21 @@
            (zp/process-attributes {:display "flex", :height "100%"} true)))
 
     (is (= "{ display : flex; height : 100%; }"
-           (zp/process-attributes {:display "flex", :height "100%"} false)))))
+           (zp/process-attributes {:display "flex", :height "100%"} false))))
+
+  (testing "join-nested-context"
+
+    (let [d1 [:html :body [:.herclass :.hisclass] :a]
+          d2 [:html :body [:.herclass :.hisclass] :a :b]
+          d3 [:html :body [:.herclass :.hisclass] [:a :b]]
+
+          c1 (" html body .herclass a" " html body .hisclass a")
+          c2 (" html body .herclass a b" " html body .hisclass a b")
+          c3 (" html body .herclass a" " html body .herclass b" " html body .hisclass a" " html body .hisclass b")
+          r1 (zp/join-nested-contexts d1)
+          r2 (zp/join-nested-contexts d2)
+          r3 (zp/join-nested-contexts d13)]
+
+      (is (= r1 c1))
+      (is (= r2 c2))
+      (is (= r3 c3)))))

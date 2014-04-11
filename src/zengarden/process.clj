@@ -21,11 +21,30 @@
   [element :- s/Keyword
    context :- (s/pred context-input-predicate) ]
 
+  (timbre/debug "process-element / element[" element "] / context[" context "]")
   (if-not (empty? context)
-    (reduce #(str %1 " " %2)
-            (map name
-                 (conj (into [] context) element)))
+
+    (if (every? keyword? context)
+      (reduce #(str %1 " " %2)
+              (map name
+                   (conj (into [] context) element)))
+      123)
     (name element)))
+
+(defn join-nested-contexts
+  "transform something like [\"a b\" \"x y\"] and [:c :d]
+   into [\"a b c\" \"a b d\" \"x y c\" \"x y d\"]"
+  [inp]
+
+  (reduce (fn [rlt e]
+
+            (let [ii (if (keyword? e) [e] e)]
+
+              (for [i rlt j ii]
+                (str i " " (name j)))))
+
+          [""]
+          inp))
 
 
 (s/defn process-attributes :- s/Str
