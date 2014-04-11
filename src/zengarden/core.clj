@@ -1,6 +1,8 @@
 (ns zengarden.core
-  (:require [schema.core :as s]))
+  (:require [schema.core :as s]
+            [zengarden.util :as zu]))
 
+(zu/turn-on-validation)
 
 (defn input-validate-fn [eachi]
 
@@ -22,8 +24,6 @@
 
 (defn css-input-predicate [input]
 
-  (println "input... " input)
-
   (and (vector? input)
        (= (count input)      ;; input in single vector or nested vector
           (count (filter input-validate-fn input)))))
@@ -33,6 +33,17 @@
 
   (println "Here...")
   "")
+
+
+(s/defn process-element :- s/Str
+  [element :- s/Keyword
+   context :- [s/Keyword]]
+
+  (if-not (empty? context)
+    (reduce #(str %1 " " %2)
+            (map name
+                 (conj context element)))
+    (name element)))
 
 
 (declare walka walkb)
