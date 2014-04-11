@@ -42,20 +42,21 @@
 
   (testing "walka - nested structures"
 
-    (let [i0 [[:html {:height "100%", :display "flex"}
-               [:body {:display "flex"}]]]
+    (let [compare0 "\n\nhtml{ \n  display : flex; \n  height : 100%; }\n\nhtml body{ \n  display : flex; }"
+          compare1 "\n\nhtml{ \n  display : flex; \n  height : 100%; }\n\nhtml body{ \n  display : flex; }\n\nhtml body .myclass{ \n  float : left; }\n\nhtml footer{ \n  background-color : black; }"
 
-          r0 (zw/walka i0 [] true)
+          i0 [[:html {:height "100%", :display "flex"}
+               [:body {:display "flex"}]]]
+          r0 (zw/walka i0 [])
 
           i1 [[:html
                {:height "100%", :display "flex"}
                [:body {:display "flex"}
                 [:.myclass {:float "left"}]]
                [:footer {:background-color "black"}]]]
+          r1 (zw/walka i1 [])]
 
-          r1 (zw/walka i1 [] true)]
+      (timbre/warn r1)
 
-      (timbre/warn r0)
-      (timbre/warn r1))
-
-    ))
+      (is (= compare0 r0))
+      (is (= compare1 r1)))))

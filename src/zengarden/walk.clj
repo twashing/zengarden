@@ -13,18 +13,18 @@
 (defn walka
 
   ([clist context]
-     (walka clist context true))
-  ([clist context pretty]
+     (walka clist context true ""))
+  ([clist context pretty result]
 
      (loop [cl clist
             ctx context
-            result ""]
+            r1 result]
 
        (let [node (first cl)
              remaining (rest cl)]
 
          (timbre/debug "node[" node "] / context[" ctx "]")
-         (let [rslt (str result
+         (let [rslt (str r1
                          (with-out-str (newline))
                          (walkb node ctx pretty))]
 
@@ -74,4 +74,5 @@
                     (concat context elements)
                     (conj (into [] context)
                           (into [] elements)))
-                  pretty))))))
+                  pretty
+                  element-string))))))
