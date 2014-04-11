@@ -1,5 +1,6 @@
 (ns zengarden.walk
   (:require [schema.core :as s]
+            [zengarden.process :as zp]
             [zengarden.util :as zu]))
 
 (zu/turn-on-validation)
@@ -29,12 +30,22 @@
     (println "elements[" elements "]")
     (println "attributes[" attrs "]")
     (println "children[" children "]")
-    (loop [elems elements]
-      (let [eelem (first elems)
-            relem (rest elems)]
-        (println "... each element[" eelem "] / context[" context "]")
-        (if-not (empty? relem)
-          (recur relem))))
+
+    (let [element-string (loop [elems elements
+                                result ""]
+
+                            (let [eelem (first elems)
+                                  relem (rest elems)
+                                  rslt (str result
+                                            (with-out-str (newline))
+                                            (zp/process-element eelem context)
+                                            (zp/process-attributes attrs))]
+
+                              (println "... each element[" eelem "] / context[" context "] / result[" rslt "]")
+
+                              (if-not (empty? relem)
+                                (recur relem rslt)
+                                rslt)))])
     (println)
 
     (if-not (empty? children)

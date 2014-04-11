@@ -32,7 +32,10 @@
           (count (filter input-validate-fn input)))))
 
 (s/defn css :- s/Str
-  [input :- (s/pred css-input-predicate)]
+  ([input :- (s/pred css-input-predicate)]
+   (css input true))
+  ([input :- (s/pred css-input-predicate)
+    pretty :- s/Bool]
 
-  (println "Here...")
-  "")
+     (println "Here...")
+     ""))
