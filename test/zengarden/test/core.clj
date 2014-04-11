@@ -4,12 +4,6 @@
             [zengarden.core :as zc]
             [taoensso.timbre :as timbre]))
 
-#_(defn fixture-http-handler [f]
-  (timbre/debug "[FIXTURE] fixture-http-handler")
-  (f))
-
-#_(use-fixtures :each fixture-http-handler)
-
 
 (deftest core
 
@@ -17,17 +11,23 @@
 
     (is (zc/input-validate-fn []))
 
-    (is (not (zc/input-validate-fn [:a :b {} {}])))
+    (is (zc/input-validate-fn [:a :s :d :f]))
+
+    (is (zc/input-validate-fn [:b {} []]))
 
     (is (zc/input-validate-fn [:a :b {} []]))
 
+    (is (not (zc/input-validate-fn [:a :b {} {}])))
+
     (is (not (zc/input-validate-fn [:a :b {} [] []]))))
 
+  (testing "css-input-predicate"
 
-  ;; input in single vector or nested vector
-  #_(testing "input - single vector"
+    (is (zc/css-input-predicate [[:a {} []]
+                                 [:b {} []]]))
 
-    )
+    (is (not (zc/css-input-predicate [[:a {} []]
+                                      [:b {} [] []]]))))
 
   ;; output to string
 

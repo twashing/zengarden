@@ -23,12 +23,10 @@
 (defn css-input-predicate [input]
 
   (println "input... " input)
-  (let []
 
-    ;; ensure all inputs match this pattern
-    (and (vector? input)
-         (= (count input)
-            (count (filter input-validate-fn input))))))
+  (and (vector? input)
+       (= (count input)    ;; ensure all inputs match this pattern
+          (count (filter input-validate-fn input)))))
 
 (s/defn css :- s/Str
   [input :- (s/pred css-input-predicate)]
