@@ -1,7 +1,9 @@
 (ns zengarden.util
-  (:require [clojure.java.io :as io]
-            [clojure.edn :as edn]))
+  (:require [schema.utils]))
 
-(defn load-edn [fname]
-  (let [pbreader (java.io.PushbackReader. (io/reader (io/resource fname)))]
-    (edn/read pbreader)))
+
+(defn turn-on-validation
+  "Turning on schema validation by default"
+  ([] (turn-on-validation true))
+  ([bool]
+     (.set_cell schema.utils/use-fn-validation bool)))

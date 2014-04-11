@@ -14,6 +14,7 @@
    [clojure.test :as test]
    [clojure.tools.namespace.repl :refer (refresh refresh-all)]
 
+   [missing-utils.core :as mu]
    [alembic.still]))
 
 
