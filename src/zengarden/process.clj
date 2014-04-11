@@ -63,8 +63,8 @@
 
      (let [attribute-strings (conj (reduce (fn [rlt e]
                                              (conj rlt (str
-                                                        (if pretty (with-out-str (newline)) "")
-                                                        (if pretty "  " "")
+                                                        (if pretty (with-out-str (newline)))
+                                                        (if pretty "  ")
                                                         (first e) " : " (second e) ";")))
                                            ["{"]
                                            (map (fn [x] [(name (first x)) (second x)])

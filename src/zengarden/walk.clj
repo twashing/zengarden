@@ -11,6 +11,7 @@
 (declare walka walkb)
 
 (defn walka
+  "Deal with a list of node trees"
 
   ([clist context]
      (walka clist context true ""))
@@ -25,7 +26,7 @@
 
          (timbre/debug "node[" node "] / context[" ctx "]")
          (let [rslt (str r1
-                         (with-out-str (newline))
+                         (if pretty (with-out-str (newline)) " ")
                          (walkb node ctx pretty))]
 
            (if (empty? remaining)
@@ -34,6 +35,7 @@
 
 
 (defn walkb
+  "Process one node (or node set) and it's attribuets and children"
 
   ([node context]
      (walkb node context true))
@@ -53,7 +55,7 @@
                               (let [eelem (first elems)
                                     relem (rest elems)
                                     rslt (str result
-                                              (with-out-str (newline))
+                                              (if pretty (with-out-str (newline)) " ")
                                               (zp/process-element eelem context)
                                               (zp/process-attributes attrs pretty))]
 
