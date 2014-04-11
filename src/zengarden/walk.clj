@@ -10,17 +10,27 @@
 
 (declare walka walkb)
 
-(defn walka [clist context]
+(defn walka
 
-  (loop [cl clist ctx context]
+  ([clist context]
+     (walka clist context true))
+  ([clist context pretty]
 
-    (let [node (first cl)
-          remaining (rest cl)]
+     (loop [cl clist
+            ctx context
+            result ""]
 
-      (timbre/debug "node[" node "] / context[" ctx "]")
-      (walkb node ctx)
-      (if-not (empty? remaining)
-        (recur remaining ctx)))))
+       (let [node (first cl)
+             remaining (rest cl)]
+
+         (timbre/debug "node[" node "] / context[" ctx "]")
+         (let [rslt (str result
+                         (with-out-str (newline))
+                         (walkb node ctx pretty))]
+
+           (if (empty? remaining)
+             rslt
+             (recur remaining ctx rslt)))))))
 
 
 (defn walkb
@@ -59,7 +69,9 @@
 
            element-string
 
-           (walka children (if (= 1 (count elements))
-                             (concat context elements)
-                             (conj (into [] context)
-                                   (into [] elements)))))))))
+           (walka children
+                  (if (= 1 (count elements))
+                    (concat context elements)
+                    (conj (into [] context)
+                          (into [] elements)))
+                  pretty))))))

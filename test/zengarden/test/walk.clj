@@ -34,11 +34,28 @@
           i2 [:.herclass :.hisclass :#anid {:margin "0 0 0 0"}]
           r2 (zw/walkb i2 [])]
 
-      (timbre/warn "r0 > " r0)
       (is (= r0 compare0))
 
       (is (= r1 compare1))
 
       (is (= r2 compare2))))
 
-  )
+  (testing "walka - nested structures"
+
+    (let [i0 [[:html {:height "100%", :display "flex"}
+               [:body {:display "flex"}]]]
+
+          r0 (zw/walka i0 [] true)
+
+          i1 [[:html
+               {:height "100%", :display "flex"}
+               [:body {:display "flex"}
+                [:.myclass {:float "left"}]]
+               [:footer {:background-color "black"}]]]
+
+          r1 (zw/walka i1 [] true)]
+
+      (timbre/warn r0)
+      (timbre/warn r1))
+
+    ))

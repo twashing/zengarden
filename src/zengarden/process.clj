@@ -12,7 +12,7 @@
   (if-not (empty? context)
     (reduce #(str %1 " " %2)
             (map name
-                 (conj context element)))
+                 (conj (into [] context) element)))
     (name element)))
 
 
