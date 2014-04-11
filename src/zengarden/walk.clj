@@ -49,6 +49,7 @@
        (let [element-string (loop [elems elements
                                    result ""]
 
+                              ;;(zu/turn-on-validation false)
                               (let [eelem (first elems)
                                     relem (rest elems)
                                     rslt (str result

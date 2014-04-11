@@ -1,13 +1,25 @@
 (ns zengarden.process
   (:require [schema.core :as s]
+            [taoensso.timbre :as timbre]
             [zengarden.util :as zu]))
 
 (zu/turn-on-validation)
 
 
+(defn context-input-predicate
+  "Test that context input is only :keywords or
+   vectors of :keywords"
+  [input]
+
+  (every? #(or (keyword? %)
+               (and
+                (vector? %)
+                (every? keyword? %)))
+          input))
+
 (s/defn process-element :- s/Str
   [element :- s/Keyword
-   context :- [s/Keyword]]
+   context :- (s/pred context-input-predicate) ]
 
   (if-not (empty? context)
     (reduce #(str %1 " " %2)
