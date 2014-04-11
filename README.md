@@ -10,23 +10,23 @@ Simply `(require '[zengarden.core :as zc])`, and start using the `(zc/css)` func
 You can have nested syntax, and multiple definitions in the root list. Here's a few example's.
 
 ```
-[[:html]]
+(zc/css [[:html]])
 
-[[:html {:height "100%" :display "flex"}]]
+(zc/css [[:html {:height "100%" :display "flex"}]])
 
-[[:html {:height "100%" :display "flex"}
-  [:body {:display "flex"}]]]
+(zc/css [[:html {:height "100%" :display "flex"}
+          [:body {:display "flex"}]]])
 
-[[:html {:height "100%" :display "flex"}
-  [:body {:display "flex"}
-   [:.myclass {:float "left"}]]
-  [:footer {:background-color "black"}]]]
+(zc/css [[:html {:height "100%" :display "flex"}
+          [:body {:display "flex"}
+           [:.myclass {:float "left"}]]
+          [:footer {:background-color "black"}]]])
 
-[[:html {:height "100%" :display "flex"}
-  [:body {:display "flex"}
-   [:.herclass :.hisclass {:float "left"}
-    [:.thisclass {:color "white"}
-     [:#anid {:color "blue"}]]]]]]
+(zc/css [[:html {:height "100%" :display "flex"}
+          [:body {:display "flex"}
+           [:.herclass :.hisclass {:float "left"}
+            [:.thisclass {:color "white"}
+             [:#anid {:color "blue"}]]]]]])
 ```
 
 
