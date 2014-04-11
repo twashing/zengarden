@@ -40,29 +40,6 @@
                                       [:b {} [] []]]))))
 
   ;; output to string
-  (testing "process-element"
-
-    (is (= "html" (zc/process-element :html [])))
-
-    (is (= "html body .herclass" (zc/process-element :.herclass [:html :body])))
-
-    (let [e1 (try (zc/process-element :.herclass [:html "body"])
-                  (catch Exception e e))]
-
-      (is (not (nil? e1)))
-      (is (= clojure.lang.ExceptionInfo (type e1)))
-      (is (-> e1
-              .toString
-              (.startsWith "clojure.lang.ExceptionInfo: Input to process-element does not match schema:"))))
-
-    (let [e2 (try (zc/process-element :.herclass #{:html :body})
-                  (catch Exception e e))]
-
-      (is (not (nil? e2)))
-      (is (= clojure.lang.ExceptionInfo (type e2)))
-      (is (-> e2
-              .toString
-              (.startsWith "clojure.lang.ExceptionInfo: Input to process-element does not match schema:")))))
 
   ;; output to file
 

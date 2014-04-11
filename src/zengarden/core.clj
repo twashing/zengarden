@@ -1,5 +1,8 @@
 (ns zengarden.core
   (:require [schema.core :as s]
+
+            [zengarden.process :as zp]
+            [zengarden.walk :as zw]
             [zengarden.util :as zu]))
 
 (zu/turn-on-validation)
