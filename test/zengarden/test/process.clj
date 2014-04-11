@@ -52,5 +52,4 @@
            (zp/process-attributes {:display "flex", :height "100%"} true)))
 
     (is (= "{ display : flex; height : 100%; }"
-           (zp/process-attributes {:display "flex", :height "100%"} false)))
-    ))
+           (zp/process-attributes {:display "flex", :height "100%"} false)))))
