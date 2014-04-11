@@ -21,35 +21,38 @@
         (recur remaining ctx)))))
 
 
-(defn walkb [node context]
+(defn walkb
 
-  (let [elements (filter keyword? node)
-        attrs (first (filter map? node))
-        children (filter vector? node)]
+  ([node context]
+     (walkb node context true))
+  ([node context pretty]
+     (let [elements (filter keyword? node)
+           attrs (first (filter map? node))
+           children (filter vector? node)]
 
-    (println "elements[" elements "]")
-    (println "attributes[" attrs "]")
-    (println "children[" children "]")
+       (println "elements[" elements "]")
+       (println "attributes[" attrs "]")
+       (println "children[" children "]")
 
-    (let [element-string (loop [elems elements
-                                result ""]
+       (let [element-string (loop [elems elements
+                                   result ""]
 
-                            (let [eelem (first elems)
-                                  relem (rest elems)
-                                  rslt (str result
-                                            (with-out-str (newline))
-                                            (zp/process-element eelem context)
-                                            (zp/process-attributes attrs))]
+                              (let [eelem (first elems)
+                                    relem (rest elems)
+                                    rslt (str result
+                                              (with-out-str (newline))
+                                              (zp/process-element eelem context)
+                                              (zp/process-attributes attrs pretty))]
 
-                              (println "... each element[" eelem "] / context[" context "] / result[" rslt "]")
+                                (println "... each element[" eelem "] / context[" context "] / result[" rslt "]")
 
-                              (if-not (empty? relem)
-                                (recur relem rslt)
-                                rslt)))])
-    (println)
+                                (if-not (empty? relem)
+                                  (recur relem rslt)
+                                  rslt)))])
+       (println)
 
-    (if-not (empty? children)
-      (walka children (if (= 1 (count elements))
-                        (concat context elements)
-                        (conj (into [] context)
-                              (into [] elements)))))))
+       (if-not (empty? children)
+         (walka children (if (= 1 (count elements))
+                           (concat context elements)
+                           (conj (into [] context)
+                                 (into [] elements))))))))
