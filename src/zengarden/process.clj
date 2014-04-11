@@ -1,5 +1,6 @@
 (ns zengarden.process
-  (:require [schema.core :as s]
+  (:require [clojure.string :as str]
+            [schema.core :as s]
             [taoensso.timbre :as timbre]
             [zengarden.util :as zu]))
 
@@ -17,20 +18,6 @@
                 (every? keyword? %)))
           input))
 
-(s/defn process-element :- s/Str
-  [element :- s/Keyword
-   context :- (s/pred context-input-predicate) ]
-
-  (timbre/debug "process-element / element[" element "] / context[" context "]")
-  (if-not (empty? context)
-
-    (if (every? keyword? context)
-      (reduce #(str %1 " " %2)
-              (map name
-                   (conj (into [] context) element)))
-      123)
-    (name element)))
-
 (defn join-nested-contexts
   "transform something like [\"a b\" \"x y\"] and [:c :d]
    into [\"a b c\" \"a b d\" \"x y c\" \"x y d\"]"
@@ -45,6 +32,25 @@
 
           [""]
           inp))
+
+(s/defn process-element :- s/Str
+  [element :- s/Keyword
+   context :- (s/pred context-input-predicate) ]
+
+  (timbre/debug "process-element / element[" element "] / context[" context "]")
+  (if-not (empty? context)
+
+    (if (every? keyword? context)
+
+      (reduce #(str %1 " " %2)
+              (map name
+                   (conj (into [] context) element)))
+
+      (str/join ","
+                (map #(str % " " (name element))
+                     (join-nested-contexts context))))
+
+    (name element)))
 
 
 (s/defn process-attributes :- s/Str

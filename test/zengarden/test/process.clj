@@ -65,7 +65,7 @@
           c3 (" html body .herclass a" " html body .herclass b" " html body .hisclass a" " html body .hisclass b")
           r1 (zp/join-nested-contexts d1)
           r2 (zp/join-nested-contexts d2)
-          r3 (zp/join-nested-contexts d13)]
+          r3 (zp/join-nested-contexts d3)]
 
       (is (= r1 c1))
       (is (= r2 c2))

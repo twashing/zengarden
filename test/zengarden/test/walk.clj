@@ -56,7 +56,19 @@
                [:footer {:background-color "black"}]]]
           r1 (zw/walka i1 [])]
 
-      (timbre/warn r1)
-
       (is (= compare0 r0))
-      (is (= compare1 r1)))))
+      (is (= compare1 r1))))
+
+  (testing "walka - nested structures with nested contexts"
+
+    (let [compare0 "\n\nhtml{ \n  height : 100%; \n  display : flex; }\n\nhtml body{ \n  display : flex; }\n\nhtml body .herclass{ \n  float : left; }\nhtml body .hisclass{ \n  float : left; }\n\n html body .herclass .thisclass, html body .hisclass .thisclass{ \n  color : white; }\n\n html body .herclass .thisclass #anid, html body .hisclass .thisclass #anid{ \n  color : blue; }"
+
+          i0 [[:html {:height "100%", :display "flex"}
+               [:body {:display "flex"}
+                [:.herclass :.hisclass {:float "left"}
+                 [:.thisclass {:color "white"}
+                  [:#anid {:color "blue"}]]]]]]
+
+          r0 (zw/walka [])]
+
+      (is (= compare0 r0)))))
