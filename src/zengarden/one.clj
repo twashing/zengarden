@@ -18,6 +18,10 @@
 (def w [[:html {:height "100%" :display "flex"}
          [:body {:display "flex"}]]])
 
+(def x [[:html {:height "100%" :display "flex"}]])
+
+(def y [[:.herclass :.hisclass :#anid {:margin "0 0 0 0"}]])
+
 
 (defn walka [clist context]
 

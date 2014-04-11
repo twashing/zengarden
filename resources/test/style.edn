@@ -1,0 +1,19 @@
+{
+ :u [[:html {:height "100%" :display "flex"}
+      [:body {:display "flex"}
+       [:.myclass {:float "left"}]]
+      [:footer {:background-color "black"}]]]
+
+ :v [[:html {:height "100%" :display "flex"}
+      [:body {:display "flex"}
+       [:.herclass :.hisclass {:float "left"}
+        [:.thisclass {:color "white"}
+         [:#anid {:color "blue"}]]]]]]
+
+ :w [[:html {:height "100%" :display "flex"}
+      [:body {:display "flex"}]]]
+
+ :x [[:html {:height "100%" :display "flex"}]]
+
+ :y [[:.herclass :.hisclass :#anid {:margin "0 0 0 0"}]]
+}
