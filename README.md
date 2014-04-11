@@ -1,6 +1,6 @@
 # zengarden
 
-This is a riff on Joel Holdbrooks' excellent [garden](https://github.com/noprompt/garden) library. This is also a library for rendering CSS in Clojure and Clojurescript. 
+Zengarden is a riff on Joel Holdbrooks' excellent [garden](https://github.com/noprompt/garden) library. It is a library for rendering CSS in Clojure.
 
 
 ## Usage
