@@ -29,10 +29,10 @@ You can have nested syntax, and multiple definitions in the root list. Here's a 
              [:#anid {:color "blue"}]]]]]])
 ```
 
-
 ## License
 
-Copyright © 2014 FIXME
+Copyright © 2014 Interrupt Software Inc.
 
 Distributed under the Eclipse Public License either version 1.0 or (at
 your option) any later version.
+
