@@ -1,5 +1,7 @@
 (ns zengarden.walk
   (:require [schema.core :as s]
+            [taoensso.timbre :as timbre]
+
             [zengarden.process :as zp]
             [zengarden.util :as zu]))
 
@@ -15,7 +17,7 @@
     (let [node (first cl)
           remaining (rest cl)]
 
-      (println "node[" node "] / context[" ctx "]")
+      (timbre/debug "node[" node "] / context[" ctx "]")
       (walkb node ctx)
       (if-not (empty? remaining)
         (recur remaining ctx)))))
@@ -30,9 +32,9 @@
            attrs (first (filter map? node))
            children (filter vector? node)]
 
-       (println "elements[" elements "]")
-       (println "attributes[" attrs "]")
-       (println "children[" children "]")
+       (timbre/debug "elements[" elements "]")
+       (timbre/debug "attributes[" attrs "]")
+       (timbre/debug "children[" children "]")
 
        (let [element-string (loop [elems elements
                                    result ""]
@@ -44,15 +46,20 @@
                                               (zp/process-element eelem context)
                                               (zp/process-attributes attrs pretty))]
 
-                                (println "... each element[" eelem "] / context[" context "] / result[" rslt "]")
+                                (timbre/debug "... each element[" eelem
+                                              "] / context[" context
+                                              "] / result[" rslt "]")
+                                (timbre/debug)
 
                                 (if-not (empty? relem)
                                   (recur relem rslt)
-                                  rslt)))])
-       (println)
+                                  rslt)))]
 
-       (if-not (empty? children)
-         (walka children (if (= 1 (count elements))
-                           (concat context elements)
-                           (conj (into [] context)
-                                 (into [] elements))))))))
+         (if (empty? children)
+
+           element-string
+
+           (walka children (if (= 1 (count elements))
+                             (concat context elements)
+                             (conj (into [] context)
+                                   (into [] elements)))))))))
