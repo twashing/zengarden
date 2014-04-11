@@ -39,15 +39,17 @@
     (is (not (zc/css-input-predicate [[:a {} []]
                                       [:b {} [] []]]))))
 
-  ;; output to string
-
-  ;; output to file
 
   ;; output inline style
 
   ;; output pretty-printed style
 
-  ;; output single element
-  (testing "single element"
 
-    (is (= 1 1))))
+  ;; output single element with attributes (:x styles)
+
+  ;; output 'n' sibling elements with attributes (:y stlyes)
+
+  ;; output nested structure (:w styles)
+
+  ;; output nested structure with 'n' siblings in the middle (:v styles)
+)
