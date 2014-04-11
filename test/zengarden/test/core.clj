@@ -39,17 +39,16 @@
     (is (not (zc/css-input-predicate [[:a {} []]
                                       [:b {} [] []]]))))
 
+  (testing "zengarden.core/css call - nested structures with nested contexts"
 
-  ;; output inline style
+    (let [compare0 "  html{ display : flex; height : 100%; }  html body{ display : flex; }  html body .herclass{ float : left; } html body .hisclass{ float : left; }   html body .herclass .thisclass, html body .hisclass .thisclass{ color : white; }   html body .herclass .thisclass #anid, html body .hisclass .thisclass #anid{ color : blue; }"
 
-  ;; output pretty-printed style
+          i0 [[:html {:height "100%", :display "flex"}
+               [:body {:display "flex"}
+                [:.herclass :.hisclass {:float "left"}
+                 [:.thisclass {:color "white"}
+                  [:#anid {:color "blue"}]]]]]]
 
+          r0 (zc/css i0 false)]
 
-  ;; output single element with attributes (:x styles)
-
-  ;; output 'n' sibling elements with attributes (:y stlyes)
-
-  ;; output nested structure (:w styles)
-
-  ;; output nested structure with 'n' siblings in the middle (:v styles)
-)
+      (is (= compare0 r0)))))

@@ -37,5 +37,4 @@
   ([input :- (s/pred css-input-predicate)
     pretty :- s/Bool]
 
-     (println "Here...")
-     ""))
+     (zw/walka input [] pretty "")))
