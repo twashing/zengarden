@@ -43,4 +43,14 @@
               .toString
               (.startsWith "clojure.lang.ExceptionInfo: Input to process-element does not match schema:")))))
 
-)
+  (testing "process-attributes"
+
+    (is (= "{ \n  display : flex; \n  height : 100%; }"
+           (zp/process-attributes {:display "flex", :height "100%"})))
+
+    (is (= "{ \n  display : flex; \n  height : 100%; }"
+           (zp/process-attributes {:display "flex", :height "100%"} true)))
+
+    (is (= "{ display : flex; height : 100%; }"
+           (zp/process-attributes {:display "flex", :height "100%"} false)))
+    ))

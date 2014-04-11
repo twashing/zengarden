@@ -14,3 +14,26 @@
             (map name
                  (conj context element)))
     (name element)))
+
+
+(s/defn process-attributes :- s/Str
+
+  ([attributes :- {s/Keyword s/Str}]
+     (process-attributes attributes true))
+
+  ([attributes :- {s/Keyword s/Str}
+    pretty :- s/Bool]
+
+     (let [attribute-strings (conj (reduce (fn [rlt e]
+                                             (conj rlt (str
+                                                        (if pretty (with-out-str (newline)) "")
+                                                        (if pretty "  " "")
+                                                        (first e) " : " (second e) ";")))
+                                           ["{"]
+                                           (map (fn [x] [(name (first x)) (second x)])
+                                                (seq attributes)))
+                                   "}")
+
+           attributeS (reduce #(str %1 " " %2) attribute-strings)]
+
+       attributeS)))
