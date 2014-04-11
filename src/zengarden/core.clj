@@ -25,35 +25,17 @@
   (println "input... " input)
 
   (and (vector? input)
-       (= (count input)    ;; ensure all inputs match this pattern
+       (= (count input)      ;; input in single vector or nested vector
           (count (filter input-validate-fn input)))))
 
 (s/defn css :- s/Str
   [input :- (s/pred css-input-predicate)]
 
-  (println "Here..."))
+  (println "Here...")
+  "")
 
 
 (declare walka walkb)
-
-(def u [[:html {:height "100%" :display "flex"}
-         [:body {:display "flex"}
-          [:.myclass {:float "left"}]]
-         [:footer {:background-color "black"}]]])
-
-(def v [[:html {:height "100%" :display "flex"}
-         [:body {:display "flex"}
-          [:.herclass :.hisclass {:float "left"}
-           [:.thisclass {:color "white"}
-            [:#anid {:color "blue"}]]]]]])
-
-(def w [[:html {:height "100%" :display "flex"}
-         [:body {:display "flex"}]]])
-
-(def x [[:html {:height "100%" :display "flex"}]])
-
-(def y [[:.herclass :.hisclass :#anid {:margin "0 0 0 0"}]])
-
 
 (defn walka [clist context]
 

@@ -1,8 +1,18 @@
 (ns zengarden.test.core
   (:require [clojure.test :refer :all]
             [midje.sweet :refer :all]
-            [zengarden.core :as zc]
-            [taoensso.timbre :as timbre]))
+            [taoensso.timbre :as timbre]
+
+            [missing-utils.core :as mu]
+            [zengarden.core :as zc]))
+
+
+(def styles nil)
+
+(defn fixture-core [f]
+  (alter-var-root #'styles (constantly (mu/load-edn "style.edn")))
+  (f))
+(use-fixtures :once fixture-core)
 
 
 (deftest core
