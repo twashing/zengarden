@@ -41,7 +41,7 @@
                                     relem (rest elems)
                                     rslt (str result
                                               (if pretty (with-out-str (newline)) " ")
-                                              (zp/process-element eelem context)
+                                              (zp/process-element eelem (into [] context))
                                               (zp/process-attributes attrs pretty))]
 
                                 (timbre/debug "... each element[" eelem

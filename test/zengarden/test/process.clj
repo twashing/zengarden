@@ -60,9 +60,10 @@
           d2 [:html :body [:.herclass :.hisclass] :a :b]
           d3 [:html :body [:.herclass :.hisclass] [:a :b]]
 
-          c1 (" html body .herclass a" " html body .hisclass a")
-          c2 (" html body .herclass a b" " html body .hisclass a b")
-          c3 (" html body .herclass a" " html body .herclass b" " html body .hisclass a" " html body .hisclass b")
+          c1 '(" html body .herclass a" " html body .hisclass a")
+          c2 '(" html body .herclass a b" " html body .hisclass a b")
+          c3 '(" html body .herclass a" " html body .herclass b"
+               " html body .hisclass a" " html body .hisclass b")
           r1 (zp/join-nested-contexts d1)
           r2 (zp/join-nested-contexts d2)
           r3 (zp/join-nested-contexts d3)]

@@ -4,19 +4,20 @@
             [taoensso.timbre :as timbre]
             [zengarden.util :as zu]))
 
-(zu/turn-on-validation)
+(zu/turn-on-validation true)
 
 
 (defn context-input-predicate
-  "Test that context input is only :keywords or
+  "Test that context input is a vector, with only :keywords or
    vectors of :keywords"
   [input]
 
-  (every? #(or (keyword? %)
-               (and
-                (vector? %)
-                (every? keyword? %)))
-          input))
+  (and (vector? input)
+       (every? #(or (keyword? %)
+                    (and
+                     (vector? %)
+                     (every? keyword? %)))
+               input)))
 
 (defn join-nested-contexts
   "transform something like [\"a b\" \"x y\"] and [:c :d]
