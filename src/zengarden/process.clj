@@ -97,14 +97,12 @@
     (str "(" (name (first qterm)) ": " (name (second qterm)) ")")
     (str "(" (name (first qterm)) ")")))
 
-(s/defn process-media-query :- s/Str
-  [query]
+(defn process-media-query [query]
 
   (reduce (fn [rlt ec]
-
             (let [qterm (if (string? ec)
-                          ec)]
-
-              (conj rlt )))
+                          ec
+                          (transform-query-term ec))]
+              (conj rlt qterm)))
           []
           query))

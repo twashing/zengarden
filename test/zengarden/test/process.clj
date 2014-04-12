@@ -94,6 +94,19 @@
       (is (= c0 r0))
       (is (= c1 r1))))
 
+  (testing "process-media-query"
+
+    (let [mq1 ["screen" "print" "and" '(:grid)]
+          r1 (zp/process-media-query mq1)
+          c1 ["screen" "print" "and" "(grid)"]
+
+          mq2 ['(:min-width "700px") "," "handheld" "and" '(:orientation "landscape")]
+          r2 (zp/process-media-query mq2)
+          c2 ["(min-width: 700px)" "," "handheld" "and" "(orientation: landscape)"]]
+
+      (is (= c1 r1))
+      (is (= c2 r2))))
+
   (testing "process-@media"
 
     [:at-media {:media-queries ["screen" "print" "and" '(:grid)]}]
