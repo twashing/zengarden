@@ -1,10 +1,19 @@
 # zengarden
 
-Zengarden is a riff on Joel Holdbrooks' excellent [garden](https://github.com/noprompt/garden) library. It is a Clojure library that uses an extension language for rendering CSS.
-
-It's meant to cover most of CSS3 syntax. The spirit of the library is to have declarative syntax, and be controllable from edn. 
+Zengarden is a riff on Joel Holdbrooks' excellent [garden](https://github.com/noprompt/garden) library. Zengarden is a simple Clojure library, using an extension language, for generating CSS. The goal is to cover most of CSS3 syntax. And the spirit of the library is to have declarative syntax, and be controllable from edn. Github and Clojars resources are in the expected locations.
 
 There's going to be a lot of missing stuff that I haven't thought of. I've just built it for my own use cases and then some. When that happens, you can i) pass in raw CSS, ii) send me feature requests or iii) send me a pull request. These are some things you get out of the box. 
+
+* nesting syntax
+* declarative, controllable from edn 
+* [@import](https://developer.mozilla.org/en-US/docs/Web/CSS/@import) calls 
+* [@media](https://developer.mozilla.org/en-US/docs/Web/CSS/@media) queries 
+* [namespaces](https://developer.mozilla.org/en-US/docs/Web/CSS/@namespace)
+
+Please note that...
+* Zengarden makes no attempt to validate your CSS. it just knows how to handle a string pattern
+* Ensure to escape all quotations in a string 
+* [CSS Object Model](http://dev.w3.org/csswg/cssom/) (ex: [CSSImportRule](http://dev.w3.org/csswg/cssom/#the-cssimportrule-interface), [CSSMediaRule](http://dev.w3.org/csswg/cssom/#the-cssmediarule-interface)) is not implemented. I'll wait until the need arises. 
 
 
 ## Usage
