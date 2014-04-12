@@ -44,4 +44,18 @@
  ;; @namespace - https://developer.mozilla.org/en-US/docs/Web/CSS/@namespace
  :l [[:at-namespace {:prefix "svg" :url "http://www.w3.org/2000/svg"}]
      [:html {:height "100%" :display "flex"}]]
+
+ :enchilada [[:at-namespace {:prefix "svg" :url "http://www.w3.org/2000/svg"}]
+             [:at-import {:url "http://fonts.googleapis.com/css?family=Gentium+Book+Basic:700italic"
+                          :media-queries [(:min-width "700px") "handheld" "and" (:orientation "landscape")]}]
+             [:html {:height "100%" :display "flex"}
+              [:body {:display "flex"}
+               [:.herclass :.hisclass {:float "left"}
+                [:.thisclass {:color "white"}
+                 [:#anid {:color "blue"}]]]]]
+             [:at-media {:media-queries ["screen" "print" "and" (:orientation "landscape")]}
+              [:.sidebar {:display "none"}]]
+             [:at-media {:media-queries ["screen" "print"]}
+              [:.sidebar {:display "block"}]]]
+
 }
