@@ -8,16 +8,6 @@
 (zu/turn-on-validation)
 (declare walka walkb)
 
-(defn dispatch-import [node context pretty] (timbre/debug "dispatch-import CALLED[" node "]"))
-(defn dispatch-media [node context pretty] (timbre/debug "dispatch-media CALLED[" node "]"))
-(defn dispatch-charset [node context pretty] (timbre/debug "dispatch-charset CALLED[" node "]"))
-(defn dispatch-supports [node context pretty] (timbre/debug "dispatch-supports CALLED[" node "]"))
-
-(defn dispatch-namespace [node context pretty]
-
-  (timbre/debug "dispatch-namespace CALLED[" node "]")
-  (zp/process-namespace node pretty))
-
 (defn dispatch-element [node context pretty]
 
   (let [elements (filter keyword? node)
@@ -59,6 +49,39 @@
                           (into [] elements)))
                   pretty
                   element-string)))))
+
+(defn dispatch-import [node context pretty] (timbre/debug "dispatch-import CALLED[" node "]"))
+(defn dispatch-media [node context pretty]
+
+  (timbre/debug "dispatch-media CALLED[" node "]")
+
+  (let [media-head (zp/process-media-head node)
+
+        rules (->> node (filter vector?) first)
+        media-tail (if rules
+                     (dispatch-element rules [] pretty)
+                     nil)]
+
+    (str media-head
+
+         (if media-tail
+           (str
+            " {"
+            (if pretty (with-out-str (newline)))
+            media-tail
+            (if pretty (with-out-str (newline)))
+            "}")
+
+           " {}"))))
+
+(defn dispatch-charset [node context pretty] (timbre/debug "dispatch-charset CALLED[" node "]"))
+(defn dispatch-supports [node context pretty] (timbre/debug "dispatch-supports CALLED[" node "]"))
+
+(defn dispatch-namespace [node context pretty]
+
+  (timbre/debug "dispatch-namespace CALLED[" node "]")
+  (zp/process-namespace node pretty))
+
 
 (defn walka
   "Deal with a list of node trees"

@@ -106,3 +106,14 @@
               (conj rlt qterm)))
           []
           query))
+
+(defn process-media-head [node]
+
+  (let [media-query (->> node (filter map?) first :media-queries)
+        processed-query (process-media-query media-query)
+
+        rules (->> node (filter vector?) first)]
+
+    (reduce (fn [rlt e] (str rlt " " e))
+            "@media"
+            processed-query)))

@@ -107,15 +107,16 @@
       (is (= c1 r1))
       (is (= c2 r2))))
 
-  (testing "process-@media"
+  (testing "process-media-head"
 
-    [:at-media {:media-queries ["screen" "print" "and" '(:grid)]}]
+    (let [i0 [:at-media {:media-queries ["screen" "print" "and" '(:grid)]}]
 
-    [:at-media {:media-queries ["screen" "print" "and" '(:orientation "landscape")]}]
+          i1 [:at-media {:media-queries ["screen" "print" "and" '(:orientation "landscape")]}]
 
-    [:at-media  {:media-queries ['(:min-width "700px") "," "handheld" "and" '(:orientation "landscape")] }]
+          i2 [:at-media
+              {:media-queries ['(:min-width "700px") "," "handheld" "and" '(:orientation "landscape")] }]
 
-    [:at-media  {:media-queries ['(:min-width "700px") "handheld" "and" '(:orientation "landscape")] }
-     [:.facet_sidebar {:display "none"}]]
+          i3 [:at-media  {:media-queries ['(:min-width "700px") "handheld" "and" '(:orientation "landscape")] }
+              [:.facet_sidebar {:display "none"}]]]
 
-    ))
+      )))
