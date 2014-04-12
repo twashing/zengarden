@@ -1,7 +1,7 @@
+- @namespace
 - @import
 - @media
 - @charset, @supports, @page
-- @namespace
 
 - pseudo-elements (incl. pseudo-element functions (ex: div:lang(fr)))
 
