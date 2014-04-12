@@ -1,6 +1,6 @@
 # zengarden
 
-Zengarden is a riff on Joel Holdbrooks' excellent [garden](https://github.com/noprompt/garden) library. Zengarden is a simple Clojure library, using an extension language, for generating CSS. The goal is to cover most of CSS3 syntax. And the spirit of the library is to have declarative syntax, and be controllable from edn. Github and Clojars resources are in the expected locations.
+Zengarden is a riff on Joel Holdbrooks' excellent [garden](https://github.com/noprompt/garden) library. Zengarden is a simple Clojure library, using an extension language, for generating CSS. The goal is to cover most of CSS3 syntax. And the spirit of the library is to have declarative syntax, and be controllable from edn.
 
 There's going to be a lot of missing stuff that I haven't thought of. I've just built it for my own use cases and then some. When that happens, you can i) pass in raw CSS, ii) send me feature requests or iii) send me a pull request. These are some things you get out of the box. 
 
@@ -18,10 +18,10 @@ Please note that...
 
 ## Usage
 
-Simply `(require '[zengarden.core :as zc])`, and start using the `(zc/css)` function. You can have nested syntax, and multiple definitions in the root list. Here's a few example's, with the resulting output.
+Simply `(require '[zengarden.core :as zc])`, and start using the `(zc/css)` function. You can have nested syntax, and multiple definitions in the root list. Below is an few example's, with the resulting output. For more input examples, you can check out the [style.edn file](https://github.com/twashing/zengarden/blob/master/resources/test/style.edn) (or [the tests](https://github.com/twashing/zengarden/tree/master/test/zengarden/test)).
 
 
-*Basic Nesting*
+**Basic Nesting**
 ```
 (require '[zengarden.core :as zc])
 
@@ -38,7 +38,7 @@ html body{
   display : flex; }
 ```
 
-*Nesting, Grouping and Ancestors*
+**Nesting, Grouping and Ancestors**
 ```
 (zc/css [[:html {:height "100%" :display "flex"}
           [:body {:display "flex"}
@@ -67,7 +67,7 @@ html body .hisclass{
   color : blue; }
 ```            
 
-*Supported AtRules - @namespace, @import and @media*
+**Supported AtRules - @namespace, @import and @media**
 ```
 
 (zc/css [[:at-namespace {:prefix "svg" :url "http://www.w3.org/2000/svg"}]

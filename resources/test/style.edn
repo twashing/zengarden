@@ -45,6 +45,7 @@
  :l [[:at-namespace {:prefix "svg" :url "http://www.w3.org/2000/svg"}]
      [:html {:height "100%" :display "flex"}]]
 
+ ;; the whole enchilada
  :enchilada [[:at-namespace {:prefix "svg" :url "http://www.w3.org/2000/svg"}]
              [:at-import {:url "http://fonts.googleapis.com/css?family=Gentium+Book+Basic:700italic"
                           :media-queries [(:min-width "700px") "handheld" "and" (:orientation "landscape")]}]

@@ -18,17 +18,11 @@
 (deftest core
 
   (testing "input-validation-fn"
-
     (is (zc/input-validate-fn []))
-
     (is (zc/input-validate-fn [:a :s :d :f]))
-
     (is (zc/input-validate-fn [:b {} []]))
-
     (is (zc/input-validate-fn [:a :b {} []]))
-
     (is (not (zc/input-validate-fn [:a :b {} {}])))
-
     (is (not (zc/input-validate-fn [:a :b {} [] []]))))
 
   (testing "css-input-predicate"
