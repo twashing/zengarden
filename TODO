@@ -1,6 +1,6 @@
 - @namespace
-- @import
 - @media
+- @import
 - @charset, @supports, @page
 
 - pseudo-elements (incl. pseudo-element functions (ex: div:lang(fr)))

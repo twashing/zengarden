@@ -42,6 +42,6 @@
       [:.facet_sidebar {:display "none"}]]]
 
  ;; @namespace - https://developer.mozilla.org/en-US/docs/Web/CSS/@namespace
- :l [[:@namespace {:prefix "svg" :url "http://www.w3.org/2000/svg"}]
+ :l [[:at-namespace {:prefix "svg" :url "http://www.w3.org/2000/svg"}]
      [:html {:height "100%" :display "flex"}]]
 }

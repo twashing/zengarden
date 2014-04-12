@@ -8,6 +8,16 @@
 (zu/turn-on-validation)
 
 
+(defn dispatch [node]
+
+  (cond
+      (= :at-import (first node)) (timbre/debug "dispatch @import")
+      (= :at-media (first node)) (timbre/debug "dispatch @media")
+      (= :at-charset (first node)) (timbre/debug "dispatch @charset")
+      (= :at-supports (first node)) (timbre/debug "dispatch @supports")
+      (= :at-namespace (first node)) (timbre/debug "dispatch @namespace")
+      :else (timbre/debug "dispatch Elements")))
+
 (declare walka walkb)
 
 (defn walka
@@ -35,12 +45,14 @@
 
 
 (defn walkb
-  "Process one node (or node set) and it's attribuets and children"
+  "Process one node (or node set) and its attributes and children"
 
   ([node context]
      (walkb node context true))
   ([node context pretty]
-     (let [elements (filter keyword? node)
+     (let [result-dispatch (dispatch node)
+
+           elements (filter keyword? node)
            attrs (first (filter map? node))
            children (filter vector? node)]
 
