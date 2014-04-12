@@ -12,10 +12,10 @@
 (defn dispatch-media [node context pretty] (timbre/debug "dispatch-media CALLED[" node "]"))
 (defn dispatch-charset [node context pretty] (timbre/debug "dispatch-charset CALLED[" node "]"))
 (defn dispatch-supports [node context pretty] (timbre/debug "dispatch-supports CALLED[" node "]"))
+
 (defn dispatch-namespace [node context pretty]
 
   (timbre/debug "dispatch-namespace CALLED[" node "]")
-
   (zp/process-namespace node pretty))
 
 (defn dispatch-element [node context pretty]

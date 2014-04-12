@@ -78,4 +78,31 @@
           r0 (zp/process-namespace i0 false)
           c0 "@namespace svg url(http://www.w3.org/2000/svg);"]
 
-      (is (= c0 r0)))))
+      (is (= c0 r0))))
+
+  (testing "transform-query-term"
+
+    (let [i0 '(:min-width "700px")
+          i1 '(:grid)
+
+          c0 "(min-width: 700px)"
+          c1 "(grid)"
+
+          r0 (zp/transform-query-term i0)
+          r1 (zp/transform-query-term i1)]
+
+      (is (= c0 r0))
+      (is (= c1 r1))))
+
+  (testing "process-@media"
+
+    [:at-media {:media-queries ["screen" "print" "and" '(:grid)]}]
+
+    [:at-media {:media-queries ["screen" "print" "and" '(:orientation "landscape")]}]
+
+    [:at-media  {:media-queries ['(:min-width "700px") "," "handheld" "and" '(:orientation "landscape")] }]
+
+    [:at-media  {:media-queries ['(:min-width "700px") "handheld" "and" '(:orientation "landscape")] }
+     [:.facet_sidebar {:display "none"}]]
+
+    ))

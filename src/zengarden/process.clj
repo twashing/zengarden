@@ -88,3 +88,23 @@
        (str "@namespace "
             (if prefix (str prefix " "))
             "url(" url ");"))))
+
+(defn transform-query-term [qterm]
+  {:pre [(or (= 1 (count qterm))
+             (= 2 (count qterm)))]}
+
+  (if (= 2 (count qterm))
+    (str "(" (name (first qterm)) ": " (name (second qterm)) ")")
+    (str "(" (name (first qterm)) ")")))
+
+(s/defn process-media-query :- s/Str
+  [query]
+
+  (reduce (fn [rlt ec]
+
+            (let [qterm (if (string? ec)
+                          ec)]
+
+              (conj rlt )))
+          []
+          query))
