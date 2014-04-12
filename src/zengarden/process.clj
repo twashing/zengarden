@@ -117,3 +117,23 @@
     (reduce (fn [rlt e] (str rlt " " e))
             "@media"
             processed-query)))
+
+(defn url-or-uri-predicate [node]
+
+  (timbre/warn "... " node)
+  (let [attrs (->> node (filter map?) first)]
+
+    (or (and (:url attrs)
+             (not (:uri attrs)))
+        (and (not (:url attrs))
+             (:uri attrs)))))
+
+(s/defn process-import :- s/Str
+
+  [node :- (s/pred url-or-uri-predicate)]
+
+  (let [nattrs (->> node (filter map?) first)
+        url (:url nattrs)
+        media-query (:media-queries nattrs)]
+
+    ""))

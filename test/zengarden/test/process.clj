@@ -126,4 +126,12 @@
 
       (is (= r0 c0))
       (is (= r1 c1))
-      (is (= r2 c2)))))
+      (is (= r2 c2))))
+
+  (testing "process-import"
+
+    (let [i0 [:at-import {:url "http://fonts.googleapis.com/css?family=Gentium+Book+Basic:700italic"}]
+          i1 [:at-import {:uri "http://fonts.googleapis.com/css?family=Gentium+Book+Basic:700italic"
+                          :media-queries [(:min-width "700px") "handheld" "and" (:orientation "landscape")]}]]
+
+      )))

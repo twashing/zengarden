@@ -23,7 +23,7 @@
  :g [[:at-import {:url "http://fonts.googleapis.com/css?family=Gentium+Book+Basic:700italic"}]
      [:html {:height "100%" :display "flex"}]]
 
- :h [[:at-import {:url "http://fonts.googleapis.com/css?family=Gentium+Book+Basic:700italic"
+ :h [[:at-import {:uri "http://fonts.googleapis.com/css?family=Gentium+Book+Basic:700italic"
                   :media-queries [(:min-width "700px") "handheld" "and" (:orientation "landscape")]}]
      [:html {:height "100%" :display "flex"}]]
 
