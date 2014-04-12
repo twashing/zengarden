@@ -1,4 +1,4 @@
-# zengarden
+# Zengarden
 
 Zengarden is a riff on Joel Holdbrooks' excellent [garden](https://github.com/noprompt/garden) library. Zengarden is a simple Clojure tool, using an extension language, for generating CSS. The goal is to cover most of CSS3. The spirit of the library is to have declarative syntax, and be controllable from edn.
 
@@ -19,7 +19,7 @@ Please note
 
 ## Usage
 
-Simply `(require '[zengarden.core :as zc])`, and start using the `(zc/css)` function. You can have nested syntax, and multiple definitions in the root list. Below is an few example's, with the resulting output. For more input examples, you can check out the [style.edn file](https://github.com/twashing/zengarden/blob/master/resources/test/style.edn) (or [the tests](https://github.com/twashing/zengarden/tree/master/test/zengarden/test)).
+Simply `(require '[zengarden.core :as zc])`, and start using the `(zc/css)` function. You can have nested syntax, and multiple definitions in the root list. Below are a few examples, with the resulting output. For more input examples, you can check out the [style.edn file](https://github.com/twashing/zengarden/blob/master/resources/test/style.edn) (or [the tests](https://github.com/twashing/zengarden/tree/master/test/zengarden/test)).
 
 
 **Basic Nesting**
