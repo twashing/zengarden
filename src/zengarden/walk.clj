@@ -6,55 +6,19 @@
             [zengarden.util :as zu]))
 
 (zu/turn-on-validation)
-
-
-(defn dispatch [node]
-
-  (cond
-      (= :at-import (first node)) (timbre/debug "dispatch @import")
-      (= :at-media (first node)) (timbre/debug "dispatch @media")
-      (= :at-charset (first node)) (timbre/debug "dispatch @charset")
-      (= :at-supports (first node)) (timbre/debug "dispatch @supports")
-      (= :at-namespace (first node)) (timbre/debug "dispatch @namespace")
-      :else (timbre/debug "dispatch Elements")))
-
 (declare walka walkb)
 
-(defn walka
-  "Deal with a list of node trees"
+(defn dispatch-import [node context pretty] (timbre/debug "dispatch-import CALLED[" node "]"))
+(defn dispatch-media [node context pretty] (timbre/debug "dispatch-media CALLED[" node "]"))
+(defn dispatch-charset [node context pretty] (timbre/debug "dispatch-charset CALLED[" node "]"))
+(defn dispatch-supports [node context pretty] (timbre/debug "dispatch-supports CALLED[" node "]"))
+(defn dispatch-namespace [node context pretty] (timbre/debug "dispatch-namespace CALLED[" node "]"))
 
-  ([clist context]
-     (walka clist context true ""))
-  ([clist context pretty result]
+(defn dispatch-element [node context pretty]
 
-     (loop [cl clist
-            ctx context
-            r1 result]
-
-       (let [node (first cl)
-             remaining (rest cl)]
-
-         (timbre/debug "node[" node "] / context[" ctx "]")
-         (let [rslt (str r1
-                         (if pretty (with-out-str (newline)) " ")
-                         (walkb node ctx pretty))]
-
-           (if (empty? remaining)
-             rslt
-             (recur remaining ctx rslt)))))))
-
-
-(defn walkb
-  "Process one node (or node set) and its attributes and children"
-
-  ([node context]
-     (walkb node context true))
-  ([node context pretty]
-     (let [result-dispatch (dispatch node)
-
-           elements (filter keyword? node)
-           attrs (first (filter map? node))
-           children (filter vector? node)]
+  (let [elements (filter keyword? node)
+        attrs (first (filter map? node))
+        children (filter vector? node)]
 
        (timbre/debug "elements[" elements "]")
        (timbre/debug "attributes[" attrs "]")
@@ -90,4 +54,42 @@
                     (conj (into [] context)
                           (into [] elements)))
                   pretty
-                  element-string))))))
+                  element-string)))))
+
+(defn walka
+  "Deal with a list of node trees"
+
+  ([clist context]
+     (walka clist context true ""))
+  ([clist context pretty result]
+
+     (loop [cl clist
+            ctx context
+            r1 result]
+
+       (let [node (first cl)
+             remaining (rest cl)]
+
+         (timbre/debug "node[" node "] / context[" ctx "]")
+         (let [rslt (str r1
+                         (if pretty (with-out-str (newline)) " ")
+                         (walkb node ctx pretty))]
+
+           (if (empty? remaining)
+             rslt
+             (recur remaining ctx rslt)))))))
+
+
+(defn walkb
+  "Process one node (or node set) and its attributes and children"
+
+  ([node context]
+     (walkb node context true))
+  ([node context pretty]
+     (cond
+      (= :at-import (first node)) (dispatch-import node context pretty)
+      (= :at-media (first node)) (dispatch-media node context pretty)
+      (= :at-charset (first node)) (dispatch-charset node context pretty)
+      (= :at-supports (first node)) (dispatch-supports node context pretty)
+      (= :at-namespace (first node)) (dispatch-namespace node context pretty)
+      :else (dispatch-element node context pretty))))
