@@ -50,10 +50,11 @@
                   pretty
                   element-string)))))
 
-(defn dispatch-import [node context pretty] (timbre/debug "dispatch-import CALLED[" node "]"))
-(defn dispatch-media [node context pretty]
+(defn dispatch-import [node context pretty] (timbre/debug "dispatch-import CALLED[" node "]")
 
-  (timbre/debug "dispatch-media CALLED[" node "]")
+  (zp/process-import node))
+
+(defn dispatch-media [node context pretty]
 
   (let [media-head (zp/process-media-head node)
 
