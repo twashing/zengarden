@@ -16,12 +16,7 @@
 
   (timbre/debug "dispatch-namespace CALLED[" node "]")
 
-  (let [prefix (:prefix (first (filter map? node)))
-        url (:url (first (filter map? node)))]
-
-    (str "@namespace "
-         (if prefix (str prefix " "))
-         "url(" url ");")))
+  (zp/process-namespace node pretty))
 
 (defn dispatch-element [node context pretty]
 

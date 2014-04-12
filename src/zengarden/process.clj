@@ -75,3 +75,16 @@
            attributeS (reduce #(str %1 " " %2) attribute-strings)]
 
        attributeS)))
+
+(s/defn process-namespace :- s/Str
+
+  ([node]
+     (process-namespace node false))
+  ([node pretty]
+
+     (let [prefix (:prefix (first (filter map? node)))
+           url (:url (first (filter map? node)))]
+
+       (str "@namespace "
+            (if prefix (str prefix " "))
+            "url(" url ");"))))

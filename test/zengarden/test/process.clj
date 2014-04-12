@@ -70,4 +70,12 @@
 
       (is (= r1 c1))
       (is (= r2 c2))
-      (is (= r3 c3)))))
+      (is (= r3 c3))))
+
+  (testing "process-namespace"
+
+    (let [i0 [:at-namespace {:prefix "svg" :url "http://www.w3.org/2000/svg"}]
+          r0 (zp/process-namespace i0 false)
+          c0 "@namespace svg url(http://www.w3.org/2000/svg);"]
+
+      (is (= c0 r0)))))
