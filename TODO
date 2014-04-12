@@ -10,6 +10,8 @@
   - attribute selectors (ex: div[foo^="bar"])
   - combinators
 
+- inline styling (for style attribute)
+
 - documentation
   - show basic structural features
   - show advanced selectors

@@ -1,21 +1,44 @@
 {
- :u [[:html {:height "100%" :display "flex"}
+ :a [[:html]]
+
+ :b [[:html {:height "100%" :display "flex"}]]
+
+ :c [[:.herclass :.hisclass :#anid {:margin "0 0 0 0"}]]
+
+ :d [[:html {:height "100%" :display "flex"}
+      [:body {:display "flex"}]]]
+
+ :e [[:html {:height "100%" :display "flex"}
       [:body {:display "flex"}
        [:.myclass {:float "left"}]]
       [:footer {:background-color "black"}]]]
 
- :v [[:html {:height "100%" :display "flex"}
+ :f [[:html {:height "100%" :display "flex"}
       [:body {:display "flex"}
        [:.herclass :.hisclass {:float "left"}
         [:.thisclass {:color "white"}
          [:#anid {:color "blue"}]]]]]]
 
- :w [[:html {:height "100%" :display "flex"}
-      [:body {:display "flex"}]]]
+ ;; @import - https://developer.mozilla.org/en-US/docs/Web/CSS/@import
+ :g [[:at-import {:url "http://fonts.googleapis.com/css?family=Gentium+Book+Basic:700italic"}]
+     [:html {:height "100%" :display "flex"}]]
 
- :x [[:html {:height "100%" :display "flex"}]]
+ :h [[:at-import {:url "http://fonts.googleapis.com/css?family=Gentium+Book+Basic:700italic"
+                :media-queries ["(min-width: 700px)" "handheld" "and" "(orientation: landscape)"]}]
+     [:html {:height "100%" :display "flex"}]]
 
- :y [[:.herclass :.hisclass :#anid {:margin "0 0 0 0"}]]
+ ;; @media - https://developer.mozilla.org/en-US/docs/Web/CSS/@media
+ :i [[:html {:height "100%" :display "flex"}]
+     [:at-media {:media-queries ["screen" "print" "and" "(orientation: landscape)"]}
+      [:.facet_sidebar {:display "none"}]]]
 
- :z [[:html]]
+ ;; @charset - https://developer.mozilla.org/en-US/docs/Web/CSS/@charset
+ :j [[:at-charset "UTF-8"]
+     [:html {:height "100%" :display "flex"}]]
+
+ ;; @supports - https://developer.mozilla.org/en-US/docs/Web/CSS/@supports
+ :k [[:html {:height "100%" :display "flex"}]
+     [:at-supports {:supports-condition [(:display "flexbox") :and ( :not (:display "inline-grid"))]}
+      [:.facet_sidebar {:display "none"}]]]
+
 }
