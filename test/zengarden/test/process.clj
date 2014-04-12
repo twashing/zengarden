@@ -132,6 +132,13 @@
 
     (let [i0 [:at-import {:url "http://fonts.googleapis.com/css?family=Gentium+Book+Basic:700italic"}]
           i1 [:at-import {:uri "http://fonts.googleapis.com/css?family=Gentium+Book+Basic:700italic"
-                          :media-queries [(:min-width "700px") "handheld" "and" (:orientation "landscape")]}]]
+                          :media-queries ['(:min-width "700px") "handheld" "and" '(:orientation "landscape")]}]
 
-      )))
+          c0 "@import url(\"http://fonts.googleapis.com/css?family=Gentium+Book+Basic:700italic\");"
+          c1 "@import \"http://fonts.googleapis.com/css?family=Gentium+Book+Basic:700italic\" (min-width: 700px) handheld and (orientation: landscape);"
+
+          r0 (zp/process-import i0)
+          r1 (zp/process-import i1)]
+
+      (is (= r0 c0))
+      (is (= r1 c1)))))

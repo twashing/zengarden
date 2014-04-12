@@ -2,7 +2,10 @@
   (:require [clojure.string :as str]
             [schema.core :as s]
             [taoensso.timbre :as timbre]
-            [zengarden.util :as zu]))
+            [zengarden.util :as zu]
+
+            [alex-and-georges.debug-repl :as debug]
+            ))
 
 (zu/turn-on-validation true)
 
@@ -99,6 +102,7 @@
 
 (defn process-media-query [query]
 
+  ;;(debug/debug-repl)
   (reduce (fn [rlt ec]
             (let [qterm (if (string? ec)
                           ec
@@ -120,7 +124,6 @@
 
 (defn url-or-uri-predicate [node]
 
-  (timbre/warn "... " node)
   (let [attrs (->> node (filter map?) first)]
 
     (or (and (:url attrs)
@@ -133,7 +136,17 @@
   [node :- (s/pred url-or-uri-predicate)]
 
   (let [nattrs (->> node (filter map?) first)
+
         url (:url nattrs)
+        uri (:uri nattrs)
         media-query (:media-queries nattrs)]
 
-    ""))
+    (str "@import "
+         (if url
+           (str "url(\"" url "\")")
+           (str "\"" uri "\""))
+         (if media-query
+           (str " "
+                (reduce (fn [rlt e] (str rlt " " e))
+                        (process-media-query media-query))))
+         ";")))
