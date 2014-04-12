@@ -116,7 +116,14 @@
           i2 [:at-media
               {:media-queries ['(:min-width "700px") "," "handheld" "and" '(:orientation "landscape")] }]
 
-          i3 [:at-media  {:media-queries ['(:min-width "700px") "handheld" "and" '(:orientation "landscape")] }
-              [:.facet_sidebar {:display "none"}]]]
+          r0 (zp/process-media-head i0)
+          r1 (zp/process-media-head i1)
+          r2 (zp/process-media-head i2)
 
-      )))
+          c0 "@media screen print and (grid)"
+          c1 "@media screen print and (orientation: landscape)"
+          c2 "@media (min-width: 700px) , handheld and (orientation: landscape)"]
+
+      (is (= r0 c0))
+      (is (= r1 c1))
+      (is (= r2 c2)))))
