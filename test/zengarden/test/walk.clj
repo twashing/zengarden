@@ -101,8 +101,22 @@
   (testing "remove-pseudoclass-brackets"
 
     (let [i0 [:at-moz-document:url-prefix '(3) :.myclass:pseudo :.thing]
+          i1 [:one :.two :#three]
 
-          r0 (zw/remove-pseudoclass-brackets i0)
-          c0 '(:at-moz-document :.myclass :.thing)]
+          r0 (zw/filter-pseudoclass-brackets i0)
+          r1 (zw/filter-pseudoclass-brackets i1)
+
+          c0 '(:at-moz-document :.myclass :.thing)
+          c1 '(:one :.two :#three)]
+
+      (is (= r0 c0))
+      (is (= r1 c1))))
+
+  (testing "CSS generation with pseudo classes, and brackets"
+
+    (let [i0 [[:at-moz-document:url-prefix '(3) {:one "two"} [:.flex-container {:width "100%"}]]]
+          r0 (zw/walka i0 [])
+
+          c0 "\n\nat-moz-document:url-prefix(3){ \n  one : two; }\n\n at-moz-document .flex-container{ \n  width : 100%; }"]
 
       (is (= r0 c0)))))

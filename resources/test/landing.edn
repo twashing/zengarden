@@ -86,7 +86,7 @@
 
  ;;Legacy Firefox implementation treats all flex containers
  ;;as inline-block elements.
- [:at-moz-document :url-prefix() {:.flex-container {:width "100%"
+ #_[:at-moz-document :url-prefix() {:.flex-container {:width "100%"
                                                     :-moz-box-sizing "border-box"}}]
 
 
@@ -120,7 +120,7 @@
                     :clip "rect(0 0 0 0)"
                     :height "1px"
                     :margin "-1px"
-                    :overflow :idden
+                    :overflow "hidden"
                     :padding "0"
                     :position "absolute"
                     :width "1px"}

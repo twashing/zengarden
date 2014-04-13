@@ -9,7 +9,7 @@
 (zu/turn-on-validation)
 (declare walka walkb)
 
-(defn remove-pseudoclass-brackets [elements]
+(defn filter-pseudoclass-brackets [elements]
 
   (->> elements
        (remove list?)
@@ -35,15 +35,15 @@
        (let [element-string (loop [elems elements
                                    result ""]
 
-                              ;;(zu/turn-on-validation false)
                               (let [eelem (first elems)
                                     relem (rest elems)
                                     rslt (str result
-                                              (if pretty (with-out-str (newline)) " ")
-                                              (if (keyword? eelem)
+                                              (if (keyword? eelem) (if pretty (with-out-str (newline)) " "))
+                                              (if (keyword? eelem)    ;; deal with element brackets
                                                 (zp/process-element eelem (into [] context))
                                                 (zp/process-element-brackets eelem (into [] context)))
-                                              (zp/process-attributes attrs pretty))]
+                                              (if (not (list? (first relem)))  ;; ensure element, lookahead 1
+                                                (zp/process-attributes attrs pretty)))]
 
                                 (timbre/debug "... each element[" eelem
                                               "] / context[" context
@@ -60,9 +60,9 @@
 
            (walka children
                   (if (= 1 (count elements))
-                    (concat context elements)
+                    (concat context (filter-pseudoclass-brackets elements))
                     (conj (into [] context)
-                          (into [] elements)))
+                          (into [] (filter-pseudoclass-brackets elements))))
                   pretty
                   element-string)))))
 

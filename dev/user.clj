@@ -15,7 +15,9 @@
    [clojure.tools.namespace.repl :refer (refresh refresh-all)]
 
    [missing-utils.core :as mu]
-   [alembic.still]))
+   [alembic.still]
+
+   [zengarden.core :as zc]))
 
 
 (defn reload-project []

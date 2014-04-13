@@ -60,9 +60,9 @@
   (timbre/debug "process-element-bracket / element[" element "] / context[" context "]")
 
   (str (reduce (fn [rlt e]
-                 (if (number? e)
-                   e
-                   (name e)))
+                 (str rlt (if (number? e)
+                            e
+                            (name e))))
                 "("
                 element)
        ")"))

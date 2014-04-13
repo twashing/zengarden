@@ -23,7 +23,7 @@
        (some keyword? eachi)   ;; there's at least 1 keyword (element)
        (or (= 0 attribute-count)
            (= 1 attribute-count))   ;; there's 0 or 1 attributes
-       (or (= 0 child-count)
+       #_(or (= 0 child-count)
            (= 1 child-count))   ;; there's 0 or 1 child vectors
        ))))
 
