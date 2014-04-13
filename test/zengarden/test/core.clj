@@ -45,4 +45,13 @@
 
           r0 (zc/css i0 false)]
 
-      (is (= compare0 r0)))))
+      (is (= compare0 r0))))
+
+  (testing "rawcss"
+
+    (let [i0 [[:html {:height "100%", :display "flex"}] [:rawcss "svg:not(:root) {\n  overflow: hidden;\n}"]]
+
+          r0 (zc/css (:m styles))
+          c0 "\n\nhtml{ \n  height : 100%; \n  display : flex; }\nsvg:not(:root) {\n  overflow: hidden;\n}"]
+
+      (is (= r0 c0)))))

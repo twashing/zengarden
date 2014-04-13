@@ -68,9 +68,22 @@ html body .hisclass{
   color : blue; }
 ```            
 
-**Supported AtRules - @namespace, @import and @media**
+** Pass in Raw CSS**
+```
+(zc/css [[:html {:height "100%", :display "flex"}] [:rawcss "svg:not(:root) {\n  overflow: hidden;\n}"]])
+
+=>
+
+html{ 
+  height : 100%; 
+  display : flex; }
+svg:not(:root) {
+  overflow: hidden;
+}
 ```
 
+**Supported AtRules - @namespace, @import and @media**
+```
 (zc/css [[:at-namespace {:prefix "svg" :url "http://www.w3.org/2000/svg"}]
          [:at-import {:url "http://fonts.googleapis.com/css?family=Gentium+Book+Basic:700italic"
                       :media-queries ['(:min-width "700px") "handheld" "and" '(:orientation "landscape")]}]

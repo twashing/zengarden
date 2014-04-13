@@ -1,7 +1,11 @@
 [ok] @namespace
 [ok] @media
-- @import
+[ok] @import
 - @charset, @supports, @page
+
+- input raw CSS
+
+- inline styling (for style attribute)
 
 - pseudo-elements (incl. pseudo-element functions (ex: div:lang(fr)))
 
@@ -10,10 +14,9 @@
   - attribute selectors (ex: div[foo^="bar"])
   - combinators
 
-- inline styling (for style attribute)
 
 - documentation
-  - show basic structural features
+  [ok] show basic structural features
   - show advanced selectors
   - show pseudo elements
-  - show @import, et al.
+  [ok] show @import, et al.

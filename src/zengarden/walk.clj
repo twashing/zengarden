@@ -120,4 +120,5 @@
       (= :at-charset (first node)) (dispatch-charset node context pretty)
       (= :at-supports (first node)) (dispatch-supports node context pretty)
       (= :at-namespace (first node)) (dispatch-namespace node context pretty)
+      (= :rawcss (first node)) (second node)
       :else (dispatch-element node context pretty))))

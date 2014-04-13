@@ -45,6 +45,14 @@
  :l [[:at-namespace {:prefix "svg" :url "http://www.w3.org/2000/svg"}]
      [:html {:height "100%" :display "flex"}]]
 
+ ;; pass in raw CSS
+ :m [[:html {:height "100%" :display "flex"}]
+     [:rawcss "svg:not(:root) {\n  overflow: hidden;\n}"]]
+
+ :n [[:html {:height "100%" :display "flex"}]
+     [:rawcss "audio:not([controls]) {\n  display: none;\n  height: 0;\n}"]]
+
+
  ;; the whole enchilada
  :enchilada [[:at-namespace {:prefix "svg" :url "http://www.w3.org/2000/svg"}]
              [:at-import {:url "http://fonts.googleapis.com/css?family=Gentium+Book+Basic:700italic"

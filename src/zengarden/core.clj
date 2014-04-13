@@ -1,11 +1,13 @@
 (ns zengarden.core
   (:require [schema.core :as s]
+            [taoensso.timbre :as timbre]
 
             [zengarden.process :as zp]
             [zengarden.walk :as zw]
             [zengarden.util :as zu]))
 
 (zu/turn-on-validation)
+(timbre/set-level! :warn)
 
 (defn input-validate-fn [eachi]
 
