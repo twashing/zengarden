@@ -1,4 +1,4 @@
-(defproject zengarden "0.1.5-SNAPSHOT"
+(defproject zengarden "0.1.5"
   :description "Zengarden is a library for rendering CSS in Clojure."
   :url "https://github.com/twashing/zengarden"
   :license {:name "Eclipse Public License"
