@@ -44,7 +44,8 @@
                                                 (zp/process-element-brackets eelem (into [] context)))
                                               (if (and (not (list? (first relem)))
                                                        (not (nil? attrs)))  ;; ensure element, lookahead 1
-                                                (zp/process-attributes attrs pretty)))]
+                                                (zp/process-attributes attrs pretty)
+                                                "{}"))]
 
                                 (timbre/debug "... each element[" eelem
                                               "] / context[" context
