@@ -16,10 +16,21 @@
        (map (fn [e]
 
               (let [eS (name e)]
-                (timbre/debug "... " eS)
                 (if (re-find #":" eS)
                   (keyword (first (str/split eS #":")))
                   e))))))
+
+(defn neither-brackets-nor-pseudoclass [each-elem rest-elems attributes]
+
+  (timbre/debug "neither-brackets-nor-pseudoclass[" each-elem
+                "] / rest[" rest-elems
+                "] / attrs[" attributes "]")
+
+  (and (not (list? (first rest-elems)))
+       (not (nil? attributes))
+       #_(if (keyword? each-elem)
+         (not (re-find #":" (name each-elem)))
+         false)))
 
 (defn dispatch-element [node context pretty]
 
@@ -42,10 +53,12 @@
                                               (if (keyword? eelem)    ;; deal with element brackets
                                                 (zp/process-element eelem (into [] context))
                                                 (zp/process-element-brackets eelem (into [] context)))
-                                              (if (and (not (list? (first relem)))
-                                                       (not (nil? attrs)))  ;; ensure element, lookahead 1
+
+                                              ;; ensure element, lookahead 1
+                                              (if (neither-brackets-nor-pseudoclass eelem relem attrs)
                                                 (zp/process-attributes attrs pretty)
-                                                "{}"))]
+                                                (if (not (list? (first relem)))
+                                                  "{}")))]
 
                                 (timbre/debug "... each element[" eelem
                                               "] / context[" context
@@ -60,13 +73,18 @@
 
            element-string
 
-           (walka children
-                  (if (= 1 (count elements))
-                    (concat context (filter-pseudoclass-brackets elements))
-                    (conj (into [] context)
-                          (into [] (filter-pseudoclass-brackets elements))))
-                  pretty
-                  element-string)))))
+           (let [xxx (reduce str (map (fn [ec]
+                                        (timbre/debug "xxx node[" ec "]")
+                                        (walka [ec]
+                                               (if (= 1 (count elements))
+                                                 (concat context (filter-pseudoclass-brackets elements))
+                                                 (conj (into [] context)
+                                                       (into [] (filter-pseudoclass-brackets elements))))
+                                               pretty
+                                               element-string))
+                                      children))
+                 _ (timbre/debug "XXX... " xxx)]
+             xxx)))))
 
 (defn dispatch-import [node context pretty] (timbre/debug "dispatch-import CALLED[" node "]")
 
@@ -132,6 +150,8 @@
   ([node context]
      (walkb node context true))
   ([node context pretty]
+
+     (timbre/debug "walkb cond / node[" node "]")
      (cond
       (= :at-import (first node)) (dispatch-import node context pretty)
       (= :at-media (first node)) (dispatch-media node context pretty)

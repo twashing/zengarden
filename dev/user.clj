@@ -16,6 +16,7 @@
 
    [missing-utils.core :as mu]
    [alembic.still]
+   [taoensso.timbre :as timbre]
 
    [zengarden.core :as zc]))
 
