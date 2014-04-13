@@ -68,7 +68,7 @@ html body .hisclass{
   color : blue; }
 ```            
 
-** Pass in Raw CSS**
+**Input Raw CSS**
 ```
 (zc/css [[:html {:height "100%", :display "flex"}] [:rawcss "svg:not(:root) {\n  overflow: hidden;\n}"]])
 
