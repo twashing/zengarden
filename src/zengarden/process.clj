@@ -2,10 +2,7 @@
   (:require [clojure.string :as str]
             [schema.core :as s]
             [taoensso.timbre :as timbre]
-            [zengarden.util :as zu]
-
-            [alex-and-georges.debug-repl :as debug]
-            ))
+            [zengarden.util :as zu]))
 
 (zu/turn-on-validation true)
 
@@ -102,7 +99,6 @@
 
 (defn process-media-query [query]
 
-  ;;(debug/debug-repl)
   (reduce (fn [rlt ec]
             (let [qterm (if (string? ec)
                           ec
