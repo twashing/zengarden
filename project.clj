@@ -11,7 +11,8 @@
   :profiles {:dev {:source-paths ["dev"]
                    :resource-paths ["." "resources/" "resources/test/"]
                    :dependencies [[midje "1.6.3"]
-                                  [com.stuartsierra/component "0.2.1"]
-                                  [alembic "0.2.1"]]}}
+                                  [org.clojure/tools.namespace "0.2.4"]
+                                  [alembic "0.2.1"]
+                                  [missing-utils "0.1.1"]]}}
 
   :lein-release {:deploy-via :clojars})
