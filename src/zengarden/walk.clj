@@ -42,7 +42,8 @@
                                               (if (keyword? eelem)    ;; deal with element brackets
                                                 (zp/process-element eelem (into [] context))
                                                 (zp/process-element-brackets eelem (into [] context)))
-                                              (if (not (list? (first relem)))  ;; ensure element, lookahead 1
+                                              (if (and (not (list? (first relem)))
+                                                       (not (nil? attrs)))  ;; ensure element, lookahead 1
                                                 (zp/process-attributes attrs pretty)))]
 
                                 (timbre/debug "... each element[" eelem
