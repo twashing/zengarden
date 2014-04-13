@@ -1,5 +1,6 @@
 (ns zengarden.walk
-  (:require [schema.core :as s]
+  (:require [clojure.string :as str]
+            [schema.core :as s]
             [taoensso.timbre :as timbre]
 
             [zengarden.process :as zp]
@@ -8,9 +9,22 @@
 (zu/turn-on-validation)
 (declare walka walkb)
 
+(defn remove-pseudoclass-brackets [elements]
+
+  (->> elements
+       (remove list?)
+       (map (fn [e]
+
+              (let [eS (name e)]
+                (timbre/debug "... " eS)
+                (if (re-find #":" eS)
+                  (keyword (first (str/split eS #":")))
+                  e))))))
+
 (defn dispatch-element [node context pretty]
 
-  (let [elements (filter keyword? node)
+  (let [elements (filter #(or (keyword? %)
+                              (list? %)) node)
         attrs (first (filter map? node))
         children (filter vector? node)]
 
@@ -26,7 +40,9 @@
                                     relem (rest elems)
                                     rslt (str result
                                               (if pretty (with-out-str (newline)) " ")
-                                              (zp/process-element eelem (into [] context))
+                                              (if (keyword? eelem)
+                                                (zp/process-element eelem (into [] context))
+                                                (zp/process-element-brackets eelem (into [] context)))
                                               (zp/process-attributes attrs pretty))]
 
                                 (timbre/debug "... each element[" eelem

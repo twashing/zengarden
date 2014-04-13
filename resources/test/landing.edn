@@ -16,7 +16,7 @@
                     ;;:display "-moz-box"
                     ;;:display "-ms-flexbox"
                     ;;:display "-webkit-flex"
-                    ;;:display "flex"
+                    :display "flex"
                     :-webkit-box-direction "normal"
                     :-moz-box-direction "normal"
                     :-webkit-box-orient "horizontal"
@@ -90,16 +90,16 @@
                                                     :-moz-box-sizing "border-box"}}]
 
 
- [:at-media :only :screen :and ("min-width" "480px")
+ [:at-media :only :screen :and (:min-width "480px")
   [:.flex-container {:-webkit-flex-direction "row"
                      :-ms-flex-direction "row"
                      :flex-direction "row"}]
   [:.flex-item:nth-child (1) {:width "200px"}]
   [:.flex-item:nth-child (2) {:width "300px"}]]
 
- [:at-media :only :screen :and ("min-width" "768px") {}]
+ [:at-media :only :screen :and (:min-width "768px") {}]
 
- [:at-media :only :screen :and ("min-width" "1140px") {}]
+ [:at-media :only :screen :and (:min-width "1140px") {}]
 
 
  ;; Helper Classes

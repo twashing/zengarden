@@ -96,4 +96,13 @@
       (is (= r0 c0))
       (is (= r1 c1))
       (is (= r2 c2))
-      (is (= r3 c3)))))
+      (is (= r3 c3))))
+
+  (testing "remove-pseudoclass-brackets"
+
+    (let [i0 [:at-moz-document:url-prefix '(3) :.myclass:pseudo :.thing]
+
+          r0 (zw/remove-pseudoclass-brackets i0)
+          c0 '(:at-moz-document :.myclass :.thing)]
+
+      (is (= r0 c0)))))

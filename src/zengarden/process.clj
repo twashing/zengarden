@@ -53,6 +53,19 @@
 
     (name element)))
 
+(s/defn process-element-brackets :- s/Str
+  [element :- [s/Any]
+   context :- (s/pred context-input-predicate)]
+
+  (timbre/debug "process-element-bracket / element[" element "] / context[" context "]")
+
+  (str (reduce (fn [rlt e]
+                 (if (number? e)
+                   e
+                   (name e)))
+                "("
+                element)
+       ")"))
 
 (s/defn process-attributes :- s/Str
 
