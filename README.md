@@ -1,6 +1,6 @@
 # Zengarden
 
-Zengarden `[zengarden "0.1.2"]` is a riff on Joel Holdbrooks' excellent [garden](https://github.com/noprompt/garden) library. Zengarden is a simple Clojure tool, using an extension language, for generating CSS. The goal is to cover most of CSS3. The spirit of the library is to have declarative syntax, and be controllable from edn.
+Zengarden `[zengarden "0.1.5"]` is a riff on Joel Holdbrooks' excellent [garden](https://github.com/noprompt/garden) library. Zengarden is a simple Clojure tool, using an extension language, for generating CSS. The goal is to cover most of CSS3. The spirit of the library is to have declarative syntax, and be controllable from edn.
 
 There's going to be a lot of missing stuff that I haven't thought of. I've just built it for my own use cases and then some. When that happens, you can *i)* pass in raw CSS, *ii)* send me feature requests or *iii)* send me a pull request. These are some things you get out of the box. 
 
