@@ -68,6 +68,38 @@ html body .hisclass{
   color : blue; }
 ```            
 
+**Pseudo Classes and Brackets**
+```
+user> (zc/css [[:.flex-item:nth-child '(3)  {:-webkit-box-ordinal-group "1"
+                                             :-moz-box-ordinal-group "1"
+                                             :-webkit-order "0"
+                                             :-ms-flex-order "0"
+                                             :order "0"
+                                             :-webkit-box-flex "0"
+                                             :-moz-box-flex "0"
+                                             :-webkit-flex "0 1 auto"
+                                             :-ms-flex "0 1 auto"
+                                             :flex "1 1 auto"
+                                             :-webkit-align-self "stretch"
+                                             :-ms-flex-item-align "stretch"
+                                             :align-self "stretch"}]])
+
+.flex-item:nth-child(3){ 
+  -webkit-flex : 0 1 auto; 
+  align-self : stretch; 
+  -webkit-box-ordinal-group : 1; 
+  flex : 1 1 auto; 
+  -webkit-box-flex : 0; 
+  -webkit-align-self : stretch; 
+  -ms-flex-item-align : stretch; 
+  -moz-box-ordinal-group : 1; 
+  -ms-flex-order : 0; 
+  order : 0; 
+  -moz-box-flex : 0; 
+  -webkit-order : 0; 
+  -ms-flex : 0 1 auto; }
+```
+
 **Input Raw CSS**
 ```
 (zc/css [[:html {:height "100%", :display "flex"}] [:rawcss "svg:not(:root) {\n  overflow: hidden;\n}"]])

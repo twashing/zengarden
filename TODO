@@ -1,13 +1,13 @@
 [ok] @namespace
 [ok] @media
 [ok] @import
+[ok] input raw CSS
+[ok] pseudo-elements (incl. pseudo-element functions (ex: div:lang(fr)))
+
+
 - @charset, @supports, @page
-
-- input raw CSS
-
 - inline styling (for style attribute)
 
-- pseudo-elements (incl. pseudo-element functions (ex: div:lang(fr)))
 
 - selectors
   - parent selectors
